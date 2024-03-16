@@ -2,10 +2,8 @@
 
 $black:#000;
 $black-2:#121212;
+$essential:#727272;
 
+$text:#b3b3b3;
 
 /* FONTS */
-
-$fallback-fonts:"Helvetica Neue", helvetica, arial, "Hiragino Kaku" "Gothic ProN", Meiryo, "MS Gothic";
-$encore-title-font: CircularSpTitle, "CircularSpTitle-Tall", "CircularSp-Arab", "CircularSp-Hebr", "CircularSp-Cyrl", "CircularSp-Grek", "CircularSp-Deva", var($fallback-fonts, sans-serif);
-$encore-body-font: CircularSp, "CircularSp-Arab", "CircularSp-Hebr", "CircularSp-Cyrl", "CircularSp-Grek", "CircularSp-Deva", var($fallback-fonts, sans-serif);

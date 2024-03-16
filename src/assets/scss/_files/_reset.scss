@@ -1,6 +1,13 @@
 *{
-    background-color: $black;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: CircularStd;
+}
+body{
+    background-color: $black;
+
+}
+li{
+    list-style: none;
 }
