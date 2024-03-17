@@ -6,6 +6,7 @@ import Credits from '../components/Credits';
 import Digression from '../components/Digression';
 import HeaderLateral from '../components/HeaderLateral';
 import Fila from '../components/Fila';
+import HeaderMain from '../components/HeaderMain';
 function App() {
   const [search, setSearch]=useState(false);
   const [bilioteca, setBiblioteca]=useState(false);
@@ -53,12 +54,14 @@ function App() {
           </nav>
           <div className='resize'></div>
         </div>
-        <main></main>
+        <main>
+          <HeaderMain/>
+        </main>
         {imgLateral && 
         <div className='lateral-right'>
           <div className='resize'></div>
           <div className='lateral-right-conteudo'>
-            <HeaderLateral setImgLateral={()=>setImgLateral(false)} close={true} url="/" title="Matias Damásio Radio"/>
+            <HeaderLateral onClick={()=>setImgLateral(false)} circle={true} url="/" tooltip="Fechar" title="Matias Damásio Radio" position="bottom" element={<svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M2.47 2.47a.75.75 0 0 1 1.06 0L8 6.94l4.47-4.47a.75.75 0 1 1 1.06 1.06L9.06 8l4.47 4.47a.75.75 0 1 1-1.06 1.06L8 9.06l-4.47 4.47a.75.75 0 0 1-1.06-1.06L6.94 8 2.47 3.53a.75.75 0 0 1 0-1.06Z"></path></svg>}/>
             <div className='cover'>
               <img src="https://i.scdn.co/image/ab67616d0000b273e6df9c1fd68e0ebb14d9644b" alt="" />
             </div>
