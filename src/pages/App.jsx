@@ -6,7 +6,8 @@ import Credits from '../components/Credits';
 import Digression from '../components/Digression';
 import HeaderLateral from '../components/HeaderLateral';
 import Fila from '../components/Fila';
-import HeaderMain from '../components/HeaderMain';
+import Main from '../components/Main';
+import Icon from '../components/Icon';
 function App() {
   const [search, setSearch]=useState(false);
   const [bilioteca, setBiblioteca]=useState(false);
@@ -14,6 +15,18 @@ function App() {
   const [favorito, setFavorito]=useState(false);
   const [imgLateral, setImgLateral]=useState(false);
   const [seguir, setSeguir]=useState(false);
+  const [deviceHover,setDeviceHover]=useState(false);
+  const [countClick,setCountClick]=useState(0);
+
+  const setHouver= ()=>{
+      setCountClick(countClick+1);
+      setDeviceHover(!deviceHover);
+      if(countClick===1){
+        setDeviceHover(false);
+        setCountClick(0);
+      }
+      console.log(countClick)
+  }
   let others=[
     {
       id:1,
@@ -55,7 +68,7 @@ function App() {
           <div className='resize'></div>
         </div>
         <main>
-          <HeaderMain/>
+          <Main/>
         </main>
         {imgLateral && 
         <div className='lateral-right'>
@@ -71,9 +84,7 @@ function App() {
             <Digression title="Em Digressão"/>
             <Fila title="Próximas na fila" more="Abrir fila"/>
           </div>
-          
         </div>}
-        
       </div>
       <footer>
         <div className='footer-1'>
@@ -88,7 +99,9 @@ function App() {
             <a href="" alt="">Anselmo Ralph</a>
           </div>
           <div className='favoritos' onClick={()=>setFavorito(!favorito)}>
-            <span>{!favorito ? <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>: <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16 img-green" /* style={{fill:'#1ed760'}} */><path d="M15.724 4.22A4.313 4.313 0 0 0 12.192.814a4.269 4.269 0 0 0-3.622 1.13.837.837 0 0 1-1.14 0 4.272 4.272 0 0 0-6.21 5.855l5.916 7.05a1.128 1.128 0 0 0 1.727 0l5.916-7.05a4.228 4.228 0 0 0 .945-3.577z"></path></svg>}</span>
+            <span>{!favorito ? <Icon tooltip="Guarda em A tua Biblioteca" pointer={true} position="center top" svg={<svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M1.69 2A4.582 4.582 0 0 1 8 2.023 4.583 4.583 0 0 1 11.88.817h.002a4.618 4.618 0 0 1 3.782 3.65v.003a4.543 4.543 0 0 1-1.011 3.84L9.35 14.629a1.765 1.765 0 0 1-2.093.464 1.762 1.762 0 0 1-.605-.463L1.348 8.309A4.582 4.582 0 0 1 1.689 2zm3.158.252A3.082 3.082 0 0 0 2.49 7.337l.005.005L7.8 13.664a.264.264 0 0 0 .311.069.262.262 0 0 0 .09-.069l5.312-6.33a3.043 3.043 0 0 0 .68-2.573 3.118 3.118 0 0 0-2.551-2.463 3.079 3.079 0 0 0-2.612.816l-.007.007a1.501 1.501 0 0 1-2.045 0l-.009-.008a3.082 3.082 0 0 0-2.121-.861z"></path></svg>}/>
+            : <Icon tooltip="Remover em A tua Biblioteca" pointer={true} position="center top" svg={<svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16 img-green" /* style={{fill:'#1ed760'}} */><path d="M15.724 4.22A4.313 4.313 0 0 0 12.192.814a4.269 4.269 0 0 0-3.622 1.13.837.837 0 0 1-1.14 0 4.272 4.272 0 0 0-6.21 5.855l5.916 7.05a1.128 1.128 0 0 0 1.727 0l5.916-7.05a4.228 4.228 0 0 0 .945-3.577z"></path></svg>}/>
+            }</span>
           </div>
         </div>
         <div className='footer-2'>
@@ -105,7 +118,54 @@ function App() {
             <small>3:10</small>
           </div>
         </div>
-        <div className='footer-3'></div>
+        <div className='footer-3'>
+          <Icon state={imgLateral} onClick={()=>setImgLateral(!imgLateral)} tooltip="Vista em Reprodução" pointer={true} position="center top" svg={<svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" style={imgLateral ? {fill:'#1ed760'}:{}} className="img img-16"><path d="M11.196 8 6 5v6l5.196-3z"></path><path d="M15.002 1.75A1.75 1.75 0 0 0 13.252 0h-10.5a1.75 1.75 0 0 0-1.75 1.75v12.5c0 .966.783 1.75 1.75 1.75h10.5a1.75 1.75 0 0 0 1.75-1.75V1.75zm-1.75-.25a.25.25 0 0 1 .25.25v12.5a.25.25 0 0 1-.25.25h-10.5a.25.25 0 0 1-.25-.25V1.75a.25.25 0 0 1 .25-.25h10.5z"></path></svg>}/>
+          <Icon tooltip="Letra" pointer={true} position="center top" svg={<svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M13.426 2.574a2.831 2.831 0 0 0-4.797 1.55l3.247 3.247a2.831 2.831 0 0 0 1.55-4.797zM10.5 8.118l-2.619-2.62A63303.13 63303.13 0 0 0 4.74 9.075L2.065 12.12a1.287 1.287 0 0 0 1.816 1.816l3.06-2.688 3.56-3.129zM7.12 4.094a4.331 4.331 0 1 1 4.786 4.786l-3.974 3.493-3.06 2.689a2.787 2.787 0 0 1-3.933-3.933l2.676-3.045 3.505-3.99z"></path></svg>}/>
+          <Icon tooltip="Fila" pointer={true} position="center top" svg={<svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M15 15H1v-1.5h14V15zm0-4.5H1V9h14v1.5zm-14-7A2.5 2.5 0 0 1 3.5 1h9a2.5 2.5 0 0 1 0 5h-9A2.5 2.5 0 0 1 1 3.5zm2.5-1a1 1 0 0 0 0 2h9a1 1 0 1 0 0-2h-9z"></path></svg>}/>
+          <div className={deviceHover ? 'tooltip-devices tooltip-yep':'tooltip-devices tooltip-nop'} onClick={setHouver}>
+            <div className='devices-body'>
+                <div className='device-'>
+                  <svg style={{fill:'#1ed760'}} className='img' data-encore-id="icon" role="presentation" aria-hidden="true" data-testid="device-icon" viewBox="0 0 24 24"><path d="M0 21a1 1 0 0 1 1-1h22a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1zM3 5a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v9a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V5zm3-1a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H6z"></path></svg>
+                  <div className='device-text'>
+                    <span>Dispositivo atual</span>
+                    <span>Este navegador Web</span>
+                  </div>
+                </div>
+                <p>Não foram encontrados outros dispositivos</p>
+                <div className='device-'>
+                  <span className='svg-icon'><svg data-encore-id="icon" role="presentation" aria-hidden="true" className='img img-24' viewBox="0 0 24 24"><path d="M17.692 14.572a.3.3 0 0 0-.03-.424A8.755 8.755 0 0 0 12 12.073a8.755 8.755 0 0 0-5.663 2.075.3.3 0 0 0-.029.424l.916 1.059a.302.302 0 0 0 .423.031A6.808 6.808 0 0 1 12 14.092c1.65 0 3.164.588 4.353 1.57a.302.302 0 0 0 .423-.031l.916-1.06z"></path><path d="M20.309 11.545a.302.302 0 0 0-.028-.425A12.651 12.651 0 0 0 12 8.036c-3.155 0-6.044 1.16-8.28 3.084a.302.302 0 0 0-.029.425l.916 1.06a.299.299 0 0 0 .421.029A10.704 10.704 0 0 1 12 10.054c2.653 0 5.084.97 6.972 2.58a.299.299 0 0 0 .421-.03l.916-1.06z"></path><path d="M1.99 9.578a.297.297 0 0 0 .42.029A14.599 14.599 0 0 1 12 6.018c3.656 0 7.003 1.35 9.59 3.589a.297.297 0 0 0 .42-.03l.916-1.059a.303.303 0 0 0-.028-.425C19.964 5.541 16.158 4 12 4 7.842 4 4.037 5.54 1.102 8.093a.303.303 0 0 0-.028.425l.916 1.06zm10.232 11.32L15 17.686a.293.293 0 0 0-.016-.405 4.384 4.384 0 0 0-5.966 0 .293.293 0 0 0-.016.405l2.777 3.212a.293.293 0 0 0 .444 0z"></path></svg></span>
+                  <div className='device-text'>
+                    <span>Verifica o teu Wi-Fi</span>
+                    <small>Liga os dispositivos que estás a usar à mesma rede Wi-Fi.</small>
+                  </div>
+                </div>
+                <div className='device-'>
+                  <span className='svg-icon'><svg data-encore-id="icon" role="presentation" aria-hidden="true" className="img img-24" viewBox="0 0 24 24"><path d="M10 19a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3h-8a3 3 0 0 0-3 3v14zm3 1a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-8z"></path><path d="M18.25 7.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM17 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-3.5-1.5a3.5 3.5 0 1 0 7 0 3.5 3.5 0 0 0-7 0zM0 4a2 2 0 0 1 2-2h5v2H2v11h5v2H2a2 2 0 0 1-2-2V4zm7 18H4v-2h3v2z"></path></svg></span>
+                  <div className='device-text'>
+                    <span>Reproduzir a partir de outro dispositivo</span>
+                    <small>Aparece automaticamente aqui.</small>
+                  </div>
+                </div>
+                <div className='device-'>
+                  <span className='svg-icon'><svg data-encore-id="icon" role="presentation" aria-hidden="true" className="img img-24" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zM1 12C1 5.925 5.925 1 12 1s11 4.925 11 11-4.925 11-11 11S1 18.075 1 12z"></path><path d="M12 6.05a1 1 0 0 1 1 1v7.486l1.793-1.793a1 1 0 1 1 1.414 1.414L12 18.364l-4.207-4.207a1 1 0 1 1 1.414-1.414L11 14.536V7.05a1 1 0 0 1 1-1z"></path></svg></span>
+                  <div className='device-text'>
+                    <span>Muda para a app Spotify</span>
+                    <small>A app pode detetar mais dispositivos.</small>
+                  </div>
+                </div>
+                <a href='' className='device-button'>
+                  <span>Não vês o teu dispositivo? <svg data-encore-id="icon" role="presentation" aria-hidden="true" data-testid="icon-external-link" className="img img-16" viewBox="0 0 16 16"><path d="M1 2.75A.75.75 0 0 1 1.75 2H7v1.5H2.5v11h10.219V9h1.5v6.25a.75.75 0 0 1-.75.75H1.75a.75.75 0 0 1-.75-.75V2.75z"></path><path d="M15 1v4.993a.75.75 0 1 1-1.5 0V3.56L8.78 8.28a.75.75 0 0 1-1.06-1.06l4.72-4.72h-2.433a.75.75 0 0 1 0-1.5H15z"></path></svg></span>
+                </a>
+            </div>
+            <Icon tooltip="Ligar a um Dispositivo" pointer={true} position="center top" svg={<svg data-encore-id="icon" role="presentation" aria-hidden="true" className="img img-16" viewBox="0 0 16 16"><path d="M6 2.75C6 1.784 6.784 1 7.75 1h6.5c.966 0 1.75.784 1.75 1.75v10.5A1.75 1.75 0 0 1 14.25 15h-6.5A1.75 1.75 0 0 1 6 13.25V2.75zm1.75-.25a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h6.5a.25.25 0 0 0 .25-.25V2.75a.25.25 0 0 0-.25-.25h-6.5zm-6 0a.25.25 0 0 0-.25.25v6.5c0 .138.112.25.25.25H4V11H1.75A1.75 1.75 0 0 1 0 9.25v-6.5C0 1.784.784 1 1.75 1H4v1.5H1.75zM4 15H2v-1.5h2V15z"></path><path d="M13 10a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm-1-5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"></path></svg>}/>
+          </div>
+          <div className="vol">
+            <Icon tooltip="Silenciar" pointer={true} position="center top" svg={<svg data-encore-id="icon" role="presentation" aria-label="Volume medium" aria-hidden="true" id="volume-icon" viewBox="0 0 16 16" className="img img-16"><path d="M9.741.85a.75.75 0 0 1 .375.65v13a.75.75 0 0 1-1.125.65l-6.925-4a3.642 3.642 0 0 1-1.33-4.967 3.639 3.639 0 0 1 1.33-1.332l6.925-4a.75.75 0 0 1 .75 0zm-6.924 5.3a2.139 2.139 0 0 0 0 3.7l5.8 3.35V2.8l-5.8 3.35zm8.683 6.087a4.502 4.502 0 0 0 0-8.474v1.65a2.999 2.999 0 0 1 0 5.175v1.649z"></path></svg>}/>
+            <small className='vol-'></small>
+          </div>
+          <Icon tooltip="Abrir Minileitor" pointer={true} position="center top" svg={<svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M16 2.45c0-.8-.65-1.45-1.45-1.45H1.45C.65 1 0 1.65 0 2.45v11.1C0 14.35.65 15 1.45 15h5.557v-1.5H1.5v-11h13V7H16V2.45z"></path><path d="M15.25 9.007a.75.75 0 0 1 .75.75v4.493a.75.75 0 0 1-.75.75H9.325a.75.75 0 0 1-.75-.75V9.757a.75.75 0 0 1 .75-.75h5.925z"></path></svg>}/>
+          <Icon tooltip="Ecrã Completo" pointer={true} position="right top" svg={<svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M6.53 9.47a.75.75 0 0 1 0 1.06l-2.72 2.72h1.018a.75.75 0 0 1 0 1.5H1.25v-3.579a.75.75 0 0 1 1.5 0v1.018l2.72-2.72a.75.75 0 0 1 1.06 0zm2.94-2.94a.75.75 0 0 1 0-1.06l2.72-2.72h-1.018a.75.75 0 1 1 0-1.5h3.578v3.579a.75.75 0 0 1-1.5 0V3.81l-2.72 2.72a.75.75 0 0 1-1.06 0z"></path></svg>}/>
+        </div>
       </footer>
     </div>
     

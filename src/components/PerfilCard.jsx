@@ -1,4 +1,4 @@
-import FollowData from "./followData"
+import FollowData from "./FollowData"
 export default function PerfilCard({style,setSeguir,isSeguir,seguir,author,listeners,text,}) {
   return (
     <div className="perfil-card">
