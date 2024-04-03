@@ -8,6 +8,7 @@ import HeaderLateral from '../components/HeaderLateral';
 import Fila from '../components/Fila';
 import Main from '../components/Main';
 import Icon from '../components/Icon';
+import CardMusicLeft from '../components/CardMusicLeft';
 function App() {
   const [search, setSearch]=useState(false);
   const [bilioteca, setBiblioteca]=useState(false);
@@ -52,16 +53,38 @@ function App() {
             </ul>
 
             <div className='menu-left'  >
-              <div className='menu-left-header' >
+              <div className={bilioteca ? 'menu-left-header menu-left-header-mob' :'menu-left-header'}>
                 <div className='menu-left-header-1' >
                   <div onClick={()=>setBiblioteca(!bilioteca)}>
-                    <span className='menu-left-header-1-svg'> {bilioteca ? <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" className="img"><path d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"></path></svg> : <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" className="img"><path d="M14.5 2.134a1 1 0 0 1 1 0l6 3.464a1 1 0 0 1 .5.866V21a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V3a1 1 0 0 1 .5-.866zM16 4.732V20h4V7.041l-4-2.309zM3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zm6 0a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1z"></path></svg>}</span>
+                    <span className='menu-left-header-1-svg'> {bilioteca ? <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" className="img"><path d="M14.5 2.134a1 1 0 0 1 1 0l6 3.464a1 1 0 0 1 .5.866V21a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V3a1 1 0 0 1 .5-.866zM16 4.732V20h4V7.041l-4-2.309zM3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zm6 0a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1z"></path></svg>:<svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 24 24" className="img"><path d="M3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v18a1 1 0 0 1-1 1zM15.5 2.134A1 1 0 0 0 14 3v18a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6.464a1 1 0 0 0-.5-.866l-6-3.464zM9 2a1 1 0 0 0-1 1v18a1 1 0 1 0 2 0V3a1 1 0 0 0-1-1z"></path></svg>}</span>
                     <span>{bilioteca ? '':'A tua Biblioteca'}</span>
                   </div>
                   <span className='padding'><ToolTil texto="Criar playlist ou pasta" position="top center"/><svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M15.25 8a.75.75 0 0 1-.75.75H8.75v5.75a.75.75 0 0 1-1.5 0V8.75H1.5a.75.75 0 0 1 0-1.5h5.75V1.5a.75.75 0 0 1 1.5 0v5.75h5.75a.75.75 0 0 1 .75.75z"></path></svg></span>
                   <span onClick={()=>setLateral(!lateral)} className='padding'><ToolTil texto={lateral ? 'Mostrar menos':'Mostrar mais'} position="top center"/>{lateral ? <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M8.81 1A.749.749 0 0 0 7.53.47L0 7.99l7.53 7.521a.75.75 0 0 0 1.234-.815.75.75 0 0 0-.174-.243L2.87 8.74h12.38a.75.75 0 1 0 0-1.498H2.87l5.72-5.713c.14-.14.22-.331.22-.53z"></path></svg>:<svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M7.19 1A.749.749 0 0 1 8.47.47L16 7.99l-7.53 7.521a.75.75 0 0 1-1.234-.815.75.75 0 0 1 .174-.243l5.72-5.714H.75a.75.75 0 1 1 0-1.498h12.38L7.41 1.529a.749.749 0 0 1-.22-.53z"></path></svg>}</span>
                 </div>
-                <div></div>
+
+                {lateral && !bilioteca ?
+                <ul className="header-user-cute">
+                  <li>Título</li>
+                  <li>Data de Criação</li>
+                  <li>Reproduzido</li>
+                </ul>:''}
+                <div className='all-user-cute'>
+                {!lateral && !bilioteca ?<div style={{padding:'8px 0',height:'32px',color:'#a7a7a7',margin:'0px 10px',display:'flex',alignItems:'center',justifyContent:'space-between'}}>
+                  <span><svg data-encore-id="icon" role="img" aria-hidden="true" className="img img-16" viewBox="0 0 16 16"><path d="M7 1.75a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5zM.25 7a6.75 6.75 0 1 1 12.096 4.12l3.184 3.185a.75.75 0 1 1-1.06 1.06L11.304 12.2A6.75 6.75 0 0 1 .25 7z"></path></svg></span>
+                  <span style={{gap:'8px',display:'flex',alignItems:'center', fontSize:'0.85rem'}}>Recentes <svg data-encore-id="icon" role="img" aria-hidden="true" viewBox="0 0 16 16" className="img img-16"><path d="M15 14.5H5V13h10v1.5zm0-5.75H5v-1.5h10v1.5zM15 3H5V1.5h10V3zM3 3H1V1.5h2V3zm0 11.5H1V13h2v1.5zm0-5.75H1v-1.5h2v1.5z"></path></svg></span>
+                  </div>:''}
+                
+                    <ul className='for-user' style={!bilioteca?{width:'100%'}:{}}>
+                      <CardMusicLeft dataCriacao="há 2 semanas" reproduzido="há 3 semanas" lateral={lateral} img="https://dailymix-images.scdn.co/v2/img/ab6761610000e5eb99e4fca7c0b7cb166d915789/5/pt-PT/default"  info1="Playlist" info2="Spotify" type="playlist" tittle="Mix do dia 5"/>
+                      <CardMusicLeft dataCriacao="há 2 semanas" reproduzido="há 3 semanas" lateral={lateral} img="https://i.scdn.co/image/ab6761610000101f7556e4e000416978383b6433"  info1="Artist"  type="artist" tittle="Anselmo Ralph"/>
+                      <CardMusicLeft dataCriacao="há 2 semanas" reproduzido="há 3 semanas" lateral={lateral} img="https://i.scdn.co/image/ab6761610000101fd52feae851c87d07fc9ede89"  info1="Artist"  type="artist" tittle="Matias Damásio"/>
+                      <CardMusicLeft dataCriacao="há 2 semanas" reproduzido="há 3 semanas" lateral={lateral} img="https://seeded-session-images.scdn.co/v2/img/122/secondary/artist/0E0XPqa6BzxSkhmhvzA3k2/pt-PT"  info1="Playlist" info2="Spotify" type="playlist" tittle="Rádio Matias Damásio"/>
+                      <CardMusicLeft dataCriacao="há 2 semanas" reproduzido="há 3 semanas" lateral={lateral} img="https://i.scdn.co/image/ab6761610000101fa48397e590a1c70e2cda7728"  info1="Artist"  type="artist" tittle="Chris Brown"/>
+                      <CardMusicLeft dataCriacao="há 2 semanas" reproduzido="há 3 semanas" lateral={lateral} img="https://i.scdn.co/image/ab6765630000bdcfc0ac4cb23b25708eb76fbe8a"  info1="Podcast" info2="Spotify" type="podcast" tittle="Acenda sua luz"/>
+                    
+                    </ul>
+                </div>
               </div>
             </div>
           </nav>
